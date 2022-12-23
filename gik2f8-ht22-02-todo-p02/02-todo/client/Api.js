@@ -1,12 +1,10 @@
 class Api {
-   url = '';
+  url = '';
 
   constructor(url) {
     this.url = url;
   }
 
-  
-  /* Create = POST */
   create(data) {
     const JSONData = JSON.stringify(data);
     console.log(`Sending ${JSONData} to ${this.url}`);
@@ -19,7 +17,8 @@ class Api {
       }
     });
 
-   return (
+
+    return (
       fetch(request)
         .then((result) => result.json())
         .then((data) => data)
@@ -27,7 +26,6 @@ class Api {
     );
   }
 
-  /* Read - GET */
   getAll() {
     return fetch(this.url)
       .then((result) => result.json())
@@ -35,18 +33,25 @@ class Api {
       .catch((err) => console.log(err));
   }
 
-   /* Update - PATCH */
-   update(id){
-    return fetch(`${this.url}/${id}`, {
-        method: 'PATCH'})
-        .then((result) => result.json())
-        .catch((err) => console.log(err));
-}
   remove(id) {
     console.log(`Removing task with id ${id}`);
+
     return fetch(`${this.url}/${id}`, {
-      method: 'DELETE'})
+      method: 'DELETE'
+    })
       .then((result) => result)
       .catch((err) => console.log(err));
   }
+
+
+
+
+  update(id){
+    return fetch(`${this.url}/${id}`, {
+        method: 'PATCH'
+      })
+      .then((result) => result.json())
+      .catch((err) => console.log(err));
+  }
+
 }
